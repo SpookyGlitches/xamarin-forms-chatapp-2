@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:ChatApp_Augusto2.CustomRenderers"
+             NavigationPage.HasNavigationBar="False"
+             mc:Ignorable="d"
+             x:Class="ChatApp_Augusto2.Views.SignInPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="6*"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout BackgroundColor="#1976D2" Grid.Row="0" ></StackLayout>
+                <StackLayout Grid.Row="1" VerticalOptions="Center" Padding="15,0">
+
+                    <Frame Style="{StaticResource EntryFrame}">
+                        <Frame.Triggers>
+                            <DataTrigger TargetType="Frame" 
+                                     Binding="{Binding Email.IsValid}"
+                                     Value="False">
+                                <Setter Property="BorderColor" Value="Red"/>
+                            </DataTrigger>
+                        </Frame.Triggers>
+                        <local:NoUEntry Text="{Binding Email.Value}" Placeholder="Email" />
+                    </Frame>
+
+                    <Frame Style="{StaticResource EntryFrame}" Padding="10,0">
+                        <Frame.Triggers>
+                            <DataTrigger TargetType="Frame" 
+                                     Binding="{Binding Password.IsValid}"
+                                     Value="False">
+                                <Setter Property="BorderColor" Value="Red"/>
+                            </DataTrigger>
+                        </Frame.Triggers>
+
+                        <StackLayout Orientation="Horizontal" Padding="0" Margin="0">
+                            <local:NoUEntry Text="{Binding Password.Value}" IsPassword="{Binding IsNotVisible}"  Placeholder="Password" ReturnType="Done" />
+                            <Button Style="{StaticResource ShowBtn}" Command="{Binding TogglePasswordCommand}" Margin="0,4">
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding IsNotVisible}" Value="False">
+                                        <Setter Property="Text" Value="Hide"/>
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame Margin="0" HorizontalOptions="End" BackgroundColor="Transparent" Padding="0,5,0,10">
+                        <Label Text="Forgot password" TextColor="Gray">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Frame>
+
+                    <Button Text="Sign in" Margin="0,10,0,0" BackgroundColor="LightGreen"  Command="{Binding SignInCommand}" />
+                    <Button Text="Create an account" BackgroundColor="LightGray" Command="{Binding SignUpCommand}" />
+
+                    <Grid ColumnSpacing="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <ImageButton CornerRadius="10" Source="GoogleSignIn.png"
+                                 Aspect="AspectFit" Grid.Row="0" Grid.Column="0"
+                                 BackgroundColor="Transparent"
+                                 />
+                        <ImageButton CornerRadius="10" Source="FacebookSignIn.png"
+                                 Aspect="AspectFit" Grid.Row="0" Grid.Column="1"
+                                 BackgroundColor="Transparent"
+                                 />
+
+                    </Grid>
+                </StackLayout>
+            </Grid>
+            <StackLayout IsVisible="{Binding IsBusy}"
+                         BackgroundColor="Transparent" HorizontalOptions="FillAndExpand"
+                         VerticalOptions="FillAndExpand">
+                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <BoxView BackgroundColor="Black" Opacity="0.5"></BoxView>
+                    <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   />
+                </Grid>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

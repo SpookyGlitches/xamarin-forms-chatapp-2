@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:ChatApp_Augusto2.CustomRenderers"
+             NavigationPage.HasNavigationBar="False"
+             mc:Ignorable="d"
+             x:Class="ChatApp_Augusto2.Views.SignUpPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="6*"/>
+                </Grid.RowDefinitions>
+                
+                <StackLayout BackgroundColor="#1976D2" Grid.Row="0">
+                </StackLayout>
+
+                <StackLayout Padding="15,0" Grid.Row="1" VerticalOptions="Center">
+
+                    <Frame Style="{StaticResource EntryFrame}" Margin="0">
+                        <Frame.Triggers>
+                            <DataTrigger TargetType="Frame" Binding="{Binding Username.IsValid}" Value="False">
+                                <Setter Property="BorderColor" Value="Red"/>
+                            </DataTrigger>
+                        </Frame.Triggers>
+                        <local:NoUEntry Text="{Binding Username.Value}" Placeholder="Username"/>
+                    </Frame>
+
+                    <Frame Style="{StaticResource EntryFrame}" Margin="0">
+                        <Frame.Triggers>
+                            <DataTrigger TargetType="Frame" Binding="{Binding Email.IsValid}" Value="False">
+                                <Setter Property="BorderColor" Value="Red"/>
+                            </DataTrigger>
+                        </Frame.Triggers>
+                            <local:NoUEntry  Text="{Binding Email.Value}"  Placeholder="Email address" Keyboard="Email"/>
+                    </Frame>
+
+                    <Frame Style="{StaticResource EntryFrame}" Margin="0">
+                        <Frame.Triggers>
+                            <DataTrigger TargetType="Frame" Binding="{Binding Password.IsValid}" Value="False">
+                                <Setter Property="BorderColor" Value="Red"/>
+                            </DataTrigger>
+                        </Frame.Triggers>
+                        <StackLayout Orientation="Horizontal" Padding="0" Margin="0">
+                            <local:NoUEntry Text="{Binding Password.Value}" IsPassword="{Binding IsNotVisible}"  Placeholder="Password" ReturnType="Done" />
+                            <Button Style="{StaticResource ShowBtn}" Command="{Binding TogglePasswordCommand}">
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding IsNotVisible}" Value="False">
+                                        <Setter Property="Text" Value="Hide"/>
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame Style="{StaticResource EntryFrame}">
+                        <Frame.Triggers>
+                            <DataTrigger TargetType="Frame" Binding="{Binding ConfirmPassword.IsValid}" Value="False">
+                                <Setter Property="BorderColor" Value="Red"/>
+                            </DataTrigger>
+                        </Frame.Triggers>
+
+                        <StackLayout Orientation="Horizontal">
+                            <local:NoUEntry Text="{Binding ConfirmPassword.Value}" IsPassword="{Binding IsNotVisible}"  Placeholder="Confirm Password" ReturnType="Done" />
+                            <Button Style="{StaticResource ShowBtn}" Command="{Binding TogglePasswordCommand}" HeightRequest="0">
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding IsNotVisible}" Value="False">
+                                        <Setter Property="Text" Value="Hide"/>
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </StackLayout>
+                    </Frame>
+
+                    <Button BackgroundColor="LightGreen" Margin="0,5,0,0" Text="Sign up" Command="{Binding SignUpCommand}"/>
+                    <Button BackgroundColor="LightGray" Text="Sign in to your account" Command="{Binding SignInCommand}"/>
+
+                    <Grid ColumnSpacing="20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+                        <ImageButton  CornerRadius="10" Source="GoogleSignUp.png" Command="{Binding GglOrFbSignUpCommand}"
+                                  Aspect="AspectFit" Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"
+                                  />
+                        <ImageButton Source="FacebookSignUp.png" BackgroundColor="Transparent" Command="{Binding GglOrFbSignUpCommand}"
+                                 Grid.Row="0" Grid.Column="1" CornerRadius="10"/>
+                    </Grid>
+                </StackLayout>
+            </Grid>
+            <StackLayout IsVisible="{Binding IsBusy}"
+                         BackgroundColor="Transparent" HorizontalOptions="FillAndExpand"
+                         VerticalOptions="FillAndExpand">
+                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <BoxView BackgroundColor="Black" Opacity="0.5"></BoxView>
+                    <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   />
+                </Grid>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

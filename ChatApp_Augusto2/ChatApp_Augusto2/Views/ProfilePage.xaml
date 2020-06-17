@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Title="Profile"
+             x:Class="ChatApp_Augusto2.Views.ProfilePage">
+    <ContentPage.Content>
+        <StackLayout Padding="10,100">
+            <Frame CornerRadius="100" Padding="7" Margin="0,0,0,20" HorizontalOptions="CenterAndExpand"  HasShadow="False"  HeightRequest="180" WidthRequest="180" BackgroundColor="#1C86EE">
+                <Frame CornerRadius="90" Padding="7" HorizontalOptions="CenterAndExpand"  HasShadow="False"  HeightRequest="180" WidthRequest="180" BackgroundColor="#60AFFE">
+                    <Frame CornerRadius="90" HorizontalOptions="CenterAndExpand"  HasShadow="False"  HeightRequest="180" WidthRequest="180" BackgroundColor="LightGray">
+                        <Image Source="PersonIcon.png"/>
+                    </Frame>
+                </Frame>
+            </Frame>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Image Source="EditIcon.png" />
+                <Label Text="{Binding Username}" FontSize="Title" FontAttributes="Bold"/>
+            </StackLayout>
+            <Label Text="{Binding Email}" Margin="0,0,0,10" FontSize="Title" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+            <Button Text="Log out" Command="{Binding LogOutCommand}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

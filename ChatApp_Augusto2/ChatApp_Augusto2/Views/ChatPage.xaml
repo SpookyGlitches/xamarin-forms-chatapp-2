@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:ChatApp_Augusto2.CustomRenderers"
+             mc:Ignorable="d"
+             Title="Chat"
+             x:Class="ChatApp_Augusto2.Views.ChatPage">
+    <ContentPage.Content>
+        <Grid Padding="10,15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+            <StackLayout  Grid.Row="0" VerticalOptions="Center">
+                <Frame Style="{StaticResource EntryFrame}"  Padding="5,0">
+                    <local:NoUEntry Text="{Binding Text}" Placeholder="Search" ReturnCommand="{Binding SearchCommand}" ReturnType="Search"/>
+                </Frame>
+            </StackLayout>
+            <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout>
+                    <ListView>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+                <!--<BoxView BackgroundColor="Black" Opacity="0.5"></BoxView>
+                <ActivityIndicator IsVisible="true" IsRunning="true"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   />-->
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
