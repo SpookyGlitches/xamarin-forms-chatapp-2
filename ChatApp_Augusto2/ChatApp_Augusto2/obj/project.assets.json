@@ -280,7 +280,7 @@
           "lib/netstandard2.0/Essential.Interfaces.dll": {}
         }
       },
-      "Xamarin.Forms/4.6.0.847": {
+      "Xamarin.Forms/4.6.0.967": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Xamarin.Forms.Core.dll": {},
@@ -1384,10 +1384,10 @@
         "xamarin.essentials.interfaces.nuspec"
       ]
     },
-    "Xamarin.Forms/4.6.0.847": {
-      "sha512": "xUUgs1/xDdS9I/oN2UkdRwd/YToqg0qhwIK8yvyJJ2Xbhsc1ssV4/DUICdjuwCttzeiAcrhILqD+0BQhifUfxw==",
+    "Xamarin.Forms/4.6.0.967": {
+      "sha512": "t+ONiIyl1J2ISXkTvuexIRxsxUxOUUsqlP94ZLyuSatq5zHpEBFYECppJRHwRw40emUt3CgDdHFq80WS0jRMJQ==",
       "type": "package",
-      "path": "xamarin.forms/4.6.0.847",
+      "path": "xamarin.forms/4.6.0.967",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1693,7 +1693,7 @@
         "lib/uap10.0.16299/Xamarin.Forms.Xaml.dll",
         "lib/uap10.0.16299/Xamarin.Forms.Xaml.pdb",
         "lib/uap10.0.16299/Xamarin.Forms.Xaml.xml",
-        "xamarin.forms.4.6.0.847.nupkg.sha512",
+        "xamarin.forms.4.6.0.967.nupkg.sha512",
         "xamarin.forms.nuspec"
       ]
     }
@@ -1705,7 +1705,7 @@
       "Plugin.CloudFirestore >= 3.1.0.2",
       "Prism.DryIoc.Forms >= 7.2.0.1422",
       "Xamarin.Essentials.Interfaces >= 1.5.2",
-      "Xamarin.Forms >= 4.6.0.847"
+      "Xamarin.Forms >= 4.6.0.967"
     ]
   },
   "packageFolders": {
@@ -1774,7 +1774,7 @@
           },
           "Xamarin.Forms": {
             "target": "Package",
-            "version": "[4.6.0.847, )"
+            "version": "[4.6.0.967, )"
           }
         },
         "imports": [

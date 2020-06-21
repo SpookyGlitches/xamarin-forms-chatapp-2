@@ -12,6 +12,7 @@ using Prism.Services;
 using ChatApp_Augusto2.Helpers;
 using Xamarin.Forms;
 using ImTools;
+using System.Linq;
 
 namespace ChatApp_Augusto2.ViewModels
 {
@@ -64,18 +65,26 @@ namespace ChatApp_Augusto2.ViewModels
                 else
                 {
                     var query = await CrossCloudFirestore.Current
-                                    .Instance
-                                    .GetCollection("users")
-                                    .WhereArrayContains("contacts",selectedItem.uid)
-                                    .GetDocumentsAsync();
+                                        .Instance
+                                        .GetCollection("users")
+                                        .GetDocument(dataClass.loggedInUser.uid)
+                                        .GetDocumentAsync();
                     //
-                    if (query.IsEmpty)
+                    var loggedInUserContacts = query.ToObject<UserModel>().contacts;
+                    bool exists = false;
+                    if(loggedInUserContacts != null)
+                    {
+                        string y =  loggedInUserContacts.FirstOrDefault(x => x.Equals(SelectedItem.uid));
+                        dataClass.loggedInUser.contacts = loggedInUserContacts;
+                        exists = !(String.IsNullOrEmpty(y));
+                    }
+                    if (!exists)
                     {
                         IsBusy = true;
                         Guid guid = Guid.NewGuid();
                         ContactModel contact = new ContactModel()
                         {
-                            id = guid.ToString(),
+                            id = Guid.NewGuid().ToString(),
                             contactID = new string[] { dataClass.loggedInUser.uid, SelectedItem.uid },
                             contactEmail = new string[] { dataClass.loggedInUser.email, SelectedItem.email },
                             contactName = new string[] { dataClass.loggedInUser.name, SelectedItem.name },
@@ -93,7 +102,7 @@ namespace ChatApp_Augusto2.ViewModels
                                 .Instance
                                 .GetCollection("users")
                                 .GetDocument(dataClass.loggedInUser.uid)
-                                .UpdateDataAsync(new { contacts = dataClass.loggedInUser.contacts });
+                                .UpdateDataAsync(new { contacts = loggedInUserContacts } );
                         if (SelectedItem.contacts == null)
                             selectedItem.contacts = new List<string>();
                         SelectedItem.contacts.Add(dataClass.loggedInUser.uid);

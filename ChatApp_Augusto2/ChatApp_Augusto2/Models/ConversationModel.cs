@@ -11,7 +11,7 @@ namespace ChatApp_Augusto2.Models
         string _id { get; set; }
         public string id
         {
-            get { return id; }
+            get { return _id; }
             set
             {
                 _id = value;
@@ -38,8 +38,8 @@ namespace ChatApp_Augusto2.Models
                 OnPropertyChanged(nameof(converseeID));
             }
         }
-        DateTime _created_at { get; set; }
-        public DateTime created_at
+        long _created_at { get; set; }
+        public long created_at
         {
             get { return _created_at; }
             set

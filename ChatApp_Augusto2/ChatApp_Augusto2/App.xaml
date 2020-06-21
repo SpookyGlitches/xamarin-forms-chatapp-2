@@ -9,7 +9,7 @@
         <ResourceDictionary>
 
             <converters:IsOwnerConverter x:Key="isOwnerConverter"/>
-            <converters:IsViewerConverter x:Key="isViewerConverter"/>
+            <!--<converters:IsViewerConverter x:Key="isViewerConverter"/>-->
 
             <Style TargetType="local:NoUEntry">
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>

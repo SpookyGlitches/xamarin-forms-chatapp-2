@@ -76,7 +76,7 @@
             },
             "Xamarin.Forms": {
               "target": "Package",
-              "version": "[4.6.0.847, )"
+              "version": "[4.7.0.968, )"
             },
             "Xamarin.GooglePlayServices.Auth": {
               "target": "Package",
@@ -148,7 +148,7 @@
             },
             "Xamarin.Forms": {
               "target": "Package",
-              "version": "[4.6.0.847, )"
+              "version": "[4.6.0.967, )"
             }
           },
           "imports": [

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Ddx6KtmWfwvoZStv2PMus1wP0Bg3C4JDEmT+9gjM6FEv6XM8RSjBpGgl8+auzmSiDms87Lz2+QxJgqUzyEwqEA==",
+  "dgSpecHash": "FOPkYECREVBaDiqBmKJLDnZN8+PGRrR9AIGRZRSR6yZ88W7VAIkYfzr6+KxDPia0pPzNuwzCYPOmhAHvmbaffA==",
   "success": true,
   "projectFilePath": "C:\\Users\\E\\Documents\\School\\2-2\\mobile-dev\\ChatApp_Augusto2\\ChatApp_Augusto2\\ChatApp_Augusto2.Android\\ChatApp_Augusto2.Android.csproj",
   "expectedPackageFiles": [
@@ -70,7 +70,7 @@
     "C:\\Users\\E\\.nuget\\packages\\xamarin.firebase.measurement.connector\\71.1701.1\\xamarin.firebase.measurement.connector.71.1701.1.nupkg.sha512",
     "C:\\Users\\E\\.nuget\\packages\\xamarin.firebase.measurement.connector.impl\\71.1705.1\\xamarin.firebase.measurement.connector.impl.71.1705.1.nupkg.sha512",
     "C:\\Users\\E\\.nuget\\packages\\xamarin.firebase.protolitewellknowntypes\\71.1601.0\\xamarin.firebase.protolitewellknowntypes.71.1601.0.nupkg.sha512",
-    "C:\\Users\\E\\.nuget\\packages\\xamarin.forms\\4.6.0.847\\xamarin.forms.4.6.0.847.nupkg.sha512",
+    "C:\\Users\\E\\.nuget\\packages\\xamarin.forms\\4.7.0.968\\xamarin.forms.4.7.0.968.nupkg.sha512",
     "C:\\Users\\E\\.nuget\\packages\\xamarin.google.autovalue.annotations\\1.6.5\\xamarin.google.autovalue.annotations.1.6.5.nupkg.sha512",
     "C:\\Users\\E\\.nuget\\packages\\xamarin.google.guava\\27.1.0\\xamarin.google.guava.27.1.0.nupkg.sha512",
     "C:\\Users\\E\\.nuget\\packages\\xamarin.google.guava.failureaccess\\1.0.1\\xamarin.google.guava.failureaccess.1.0.1.nupkg.sha512",

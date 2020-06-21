@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:ChatApp_Augusto2.CustomRenderers"
+             xmlns:converters="clr-namespace:ChatApp_Augusto2.Converters"
+             mc:Ignorable="d"
+             x:Class="ChatApp_Augusto2.Views.MessagesPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:IsViewerConverter x:Key="isViewerConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.75*"/>
+                <RowDefinition Height="9.25*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" BackgroundColor="#1976D2" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Column="0" Padding="20,10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"> 
+                    <Label Text="{Binding ConversationPartner.contactName[0]}" FontSize="Title" TextColor="White"  VerticalOptions="Center" FontAttributes="Bold"/>
+                </StackLayout>
+                <Frame Grid.Column="1" HasShadow="False" Padding="0" BackgroundColor="Transparent">
+                    <Label Text="x" FontAttributes="Bold" FontSize="Title"
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                           TextColor="White"
+                           />
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PopModalCommand}"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+            </Grid>
+            <StackLayout Grid.Row="1">
+                <ListView HorizontalOptions="Fill" VerticalOptions="Start" HasUnevenRows="True"
+                          SeparatorVisibility="None" Margin="5,0" ItemsSource="{Binding ConversationsList}"
+                          x:Name="ConversationsListView"
+                          >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ContentView>
+                                    <StackLayout BackgroundColor="LightBlue" Margin="5,5,30,5"
+                                                 HorizontalOptions="Start" 
+                                                 >  
+                                        <StackLayout.Triggers>
+                                            <DataTrigger TargetType="StackLayout" Binding="{Binding converseeID, Converter={StaticResource isViewerConverter}}" 
+                                                         Value="True"
+                                                         >
+                                                <Setter Property="BackgroundColor" Value="LightGreen"/>
+                                                <Setter Property="HorizontalOptions" Value="End"/>
+                                                <Setter Property="Margin" Value="30,5,5,5" />
+                                            </DataTrigger>
+                                        </StackLayout.Triggers>
+                                        <Label Text="{Binding message}" Margin="5"
+                                               HorizontalOptions="Start" HorizontalTextAlignment="Start" VerticalTextAlignment="End"
+                                               FontSize="Body"/>
+                                    </StackLayout>
+                                </ContentView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Grid VerticalOptions="EndAndExpand" Padding="15,10" BackgroundColor="AliceBlue">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout HorizontalOptions="Fill" Grid.Column="0" Padding="0,5" VerticalOptions="CenterAndExpand"
+                                 BackgroundColor="Transparent">
+                        <Editor Placeholder="Write something here ..." AutoSize="TextChanges"
+                                BackgroundColor="Transparent"
+                                Text="{Binding Message}"
+                                />
+                    </StackLayout>
+                    <Frame Grid.Column="1" BackgroundColor="Transparent" Padding="0">
+                        <Button Text="Send"
+                                CornerRadius="10"
+                                Margin="0"
+                                VerticalOptions="Center"
+                                TextColor="White"
+                                BackgroundColor="#1976D2"
+                                Command="{Binding SendCommand}"
+                                />
+                    </Frame>
+                </Grid>
+
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

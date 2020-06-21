@@ -46,6 +46,7 @@ namespace ChatApp_Augusto2
             containerRegistry.RegisterForNavigation<TabbedPageMenu>();
             containerRegistry.RegisterForNavigation<SearchPage,SearchPageViewModel>();
             containerRegistry.RegisterForNavigation<ForgotPasswordPage,ForgotPasswordPageViewModel>();
+            containerRegistry.RegisterForNavigation<MessagesPage>();
 
 
         }

@@ -17,7 +17,7 @@
             </Frame>
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                 <Image Source="EditIcon.png" />
-                <Label Text="{Binding Username}" FontSize="Title" FontAttributes="Bold"/>
+                <Label Text="{Binding Username}"  FontSize="Title" FontAttributes="Bold"/>
             </StackLayout>
             <Label Text="{Binding Email}" Margin="0,0,0,10" FontSize="Title" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
             <Button Text="Log out" Command="{Binding LogOutCommand}" />
