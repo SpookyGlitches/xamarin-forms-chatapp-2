@@ -1,6 +1,6 @@
 <p style="text-align: center;">👻💀👻💀👻💀👻💀👻💀👻💀👻💀👻💀</p>
 
-# Chat App
+# Chat App 
 
 This is a mobile chat application developed under Xamarin Forms. Despite the name Forms, I've only developed for Android.
 
@@ -11,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-In the Android Manifest, the minimum android version is Android 5.0 (Lollipop) and the target version is Android 9.0 (Pie)
+In the Android Manifest, the minimum android version is Android 5.0 (Lollipop) and the target version is Android 9.0 (Pie). 
 
 #### Installing
 
@@ -33,6 +33,16 @@ Unfamiliar of this phase but Diawi was used for this phase.
 * [Prism](https://prismlibrary.com/)
 * [Firebase](https://firebase.google.com/)
 * [Firestore](https://firebase.google.com/docs/firestore)
+
+## Issues, Challenges encountered and Etc.
+
+1. When an entry is focused in the chat functionality, the name of the person you're chatting with goes up.
+2. Google Sign In and Sign up buttons has a shadow on its frame so that to hide the image not filling up the full width and height of the frame.
+3. Show button is a boxview and a label because the text in button is given a padding.
+4. When a cell in the contacts list view is tapped, it's background color changes for a brief moment showing the gaps between the upper and lower cells since.
+5. Sometimes, after debugging I see a message skipped frames 😢. That's why the app is slow.
+6. Picture in the profile page, entry focus, show button, those took me lots of time.
+7. I don't know where to put the code that fires everytime there is a document change.
 
 ## Authors
 
