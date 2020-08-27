@@ -17,11 +17,6 @@ namespace ChatApp_Augusto2.Validations
             set
             {
                 _value = value;
-                if (isValid != true || string.IsNullOrEmpty(value))
-                {
-                    IsValid = true;
-                    OnPropertyChanged();
-                }
             }
         }
         public bool IsValid
@@ -35,7 +30,7 @@ namespace ChatApp_Augusto2.Validations
         }
         public void Validate()
         {
-            IsValid = !string.IsNullOrWhiteSpace(Value) ? true : false;
+            IsValid = !string.IsNullOrWhiteSpace(Value);
         }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

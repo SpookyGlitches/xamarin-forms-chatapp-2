@@ -14,15 +14,11 @@ namespace ChatApp_Augusto2.Views
     {
         public MessagesPage()
         {
-            InitializeComponent();
-            //MessagingCenter.Subscribe<object>(this, "LastMessage", (sender) => {
-            //    MainScreenMessagesListView.ScrollTo(..., ScrollToPosition.End, true);
-            //});
-            
+            InitializeComponent();            
             MessagingCenter.Subscribe<object,object>(this, "LastMessage", (sender,arg) =>
               {
                   ConversationsListView.ScrollTo(arg, ScrollToPosition.End, true);
-              });
+            });
         }
     }
 }

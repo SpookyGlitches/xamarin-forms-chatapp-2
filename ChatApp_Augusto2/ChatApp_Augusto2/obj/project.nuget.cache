@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xpbonfNQV4JblfQyi4depAwuzyvzkR3HCtRw5fvdF40Hj0fQMmiPzvD347Wg+3Y99I1Npfe1C7SF+Rqdq2NyrQ==",
+  "dgSpecHash": "cuxqG2uu3Nnp+Fyc/dBHsnel+M9ToNWrp35JbVh21xE7xTPNWU29TpLFi7U/PiiFDHO5GkuAP7OfgUtdbmKX3g==",
   "success": true,
   "projectFilePath": "C:\\Users\\E\\Documents\\School\\2-2\\mobile-dev\\ChatApp_Augusto2\\ChatApp_Augusto2\\ChatApp_Augusto2\\ChatApp_Augusto2.csproj",
   "expectedPackageFiles": [
@@ -26,6 +26,7 @@
     "C:\\Users\\E\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\E\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
     "C:\\Users\\E\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.3\\system.threading.tasks.extensions.4.5.3.nupkg.sha512",
+    "C:\\Users\\E\\.nuget\\packages\\xam.plugins.forms.imagecircle\\3.0.0.5\\xam.plugins.forms.imagecircle.3.0.0.5.nupkg.sha512",
     "C:\\Users\\E\\.nuget\\packages\\xamarin.essentials\\1.5.2\\xamarin.essentials.1.5.2.nupkg.sha512",
     "C:\\Users\\E\\.nuget\\packages\\xamarin.essentials.interfaces\\1.5.2\\xamarin.essentials.interfaces.1.5.2.nupkg.sha512",
     "C:\\Users\\E\\.nuget\\packages\\xamarin.forms\\4.6.0.967\\xamarin.forms.4.6.0.967.nupkg.sha512"

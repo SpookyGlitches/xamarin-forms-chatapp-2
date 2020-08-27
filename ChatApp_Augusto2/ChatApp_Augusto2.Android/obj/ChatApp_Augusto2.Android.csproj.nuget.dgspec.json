@@ -58,10 +58,6 @@
               "target": "Package",
               "version": "[7.2.0.1046, )"
             },
-            "Rg.Plugins.Popup": {
-              "target": "Package",
-              "version": "[2.0.0.3, )"
-            },
             "Xamarin.Essentials.Interfaces": {
               "target": "Package",
               "version": "[1.5.2, )"
@@ -141,6 +137,10 @@
             "Prism.DryIoc.Forms": {
               "target": "Package",
               "version": "[7.2.0.1422, )"
+            },
+            "Xam.Plugins.Forms.ImageCircle": {
+              "target": "Package",
+              "version": "[3.0.0.5, )"
             },
             "Xamarin.Essentials.Interfaces": {
               "target": "Package",

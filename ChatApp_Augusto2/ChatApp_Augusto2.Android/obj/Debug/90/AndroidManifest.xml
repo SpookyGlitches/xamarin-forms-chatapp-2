@@ -6,18 +6,13 @@
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
   <application android:label="ChatApp_Augusto2.Android" android:icon="@mipmap/ic_launcher" android:name="android.app.Application" android:allowBackup="true" android:debuggable="true">
     <uses-library android:name="org.apache.http.legacy" android:required="false" />
-    <activity android:icon="@mipmap/ic_launcher" android:label="ChatApp" android:noHistory="true" android:theme="@style/splashscreen" android:name="crc6492666a866c9511ea.SplashActivity">
+    <activity android:icon="@mipmap/ic_launcher" android:label="ChatApp_Augusto2" android:noHistory="true" android:theme="@style/splashscreen" android:name="crc6492666a866c9511ea.SplashActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:configChanges="orientation|screenSize" android:icon="@mipmap/ic_launcher" android:label="ChatApp_Augusto2" android:theme="@style/MainTheme" android:name="crc645e1d3b4e78c1b476.MainActivity">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-    </activity>
+    <activity android:configChanges="orientation|screenSize" android:icon="@mipmap/ic_launcher" android:label="ChatApp_Augusto2" android:theme="@style/MainTheme" android:name="crc645e1d3b4e78c1b476.MainActivity" />
     <service android:name="crc64a98abb514ffad9f1.KeepAliveService" />
     <receiver android:enabled="true" android:exported="false" android:label="Essentials Battery Broadcast Receiver" android:name="crc64a0e0a82d0db9a07d.BatteryBroadcastReceiver" />
     <receiver android:enabled="true" android:exported="false" android:label="Essentials Energy Saver Broadcast Receiver" android:name="crc64a0e0a82d0db9a07d.EnergySaverBroadcastReceiver" />

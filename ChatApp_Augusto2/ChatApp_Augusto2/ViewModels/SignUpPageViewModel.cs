@@ -20,97 +20,71 @@ namespace ChatApp_Augusto2.ViewModels
 
         public SignUpPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService):base(navigationService)
         {
-            Username = new ValidatableString();
-            Password = new ValidatableString();
-            Email = new ValidatableString();
-            ConfirmPassword = new ValidatableString();
-
-            SignUpCommand = new Command(SignUpSave);
-            SignInCommand = new Command(SignIn);
-
-            TogglePasswordCommand = new Command(() => IsNotVisible = !IsNotVisible);
-
-            isNotVisible = true;
-
-            Username.IsValid = Password.IsValid = ConfirmPassword.IsValid = Email.IsValid = true;
 
             _navigationService = navigationService;
             _pageDialogService = pageDialogService;
+
+            username = new ValidatableString();
+            password = new ValidatableString();
+            confirmPassword = new ValidatableString();
+            email = new ValidatableString();
+
+            isNotVisible = true;
+            username.IsValid = password.IsValid = confirmPassword.IsValid = email.IsValid = true;
         }
 
         private bool isBusy;
         public bool IsBusy
         {
             get { return isBusy; }
-            set 
-            { 
-                SetProperty(ref isBusy, value);
-                RaisePropertyChanged();
-            }
+            set { SetProperty(ref isBusy, value); }
         }
-        private ValidatableString username;
-        public ValidatableString Username
+        private ValidatableString email;
+        public ValidatableString Email
         {
-            get { return username; }
-            set 
-            {
-                SetProperty(ref username, value);
-                RaisePropertyChanged();
-            }
+            get { return email; }
+            set { SetProperty(ref email, value);  }
         }
-
         private ValidatableString password;
         public ValidatableString Password
         {
             get { return password; }
-            set 
-            { 
-                SetProperty(ref password, value);
-                RaisePropertyChanged();
-            }
+            set { SetProperty(ref password, value); }
         }
         private ValidatableString confirmPassword;
         public ValidatableString ConfirmPassword
         {
             get { return confirmPassword; }
-            set
-            {
-                SetProperty(ref confirmPassword, value);
-                RaisePropertyChanged();
-            }
+            set { SetProperty(ref confirmPassword, value); }
         }
-
-        public Command SignUpCommand { get; private set; }
-        public Command SignInCommand { get; private set; }
-        public Command TogglePasswordCommand { get; private set; }
-
-        private ValidatableString email;
-        public ValidatableString Email
+        private ValidatableString username;
+        public ValidatableString Username
         {
-            get { return email; }
-            set 
-            {
-                SetProperty(ref email, value);
-                //RaisePropertyChanged();
-            }
+            get { return username; }
+            set { SetProperty(ref username, value); }
         }
+        public Command SignUpCommand => new Command(SignUpSave);
+        public Command TogglePasswordCommand => new Command(() => IsNotVisible = !IsNotVisible);
+        public Command FocusedCommand => new Command(Focused);
+
         private bool isNotVisible;
         public bool IsNotVisible
         {
             get { return isNotVisible; }
-            set 
-            {
-                SetProperty(ref isNotVisible, value);
-                //RaisePropertyChanged();
-            }
+            set { SetProperty(ref isNotVisible, value); }
         }
 
         public INavigationService _navigationService { get; private set; }
         public IPageDialogService _pageDialogService { get; private set; }
-
-        private async void SignIn(object obj)
+        private void Focused(object obj)
         {
-            await _navigationService.GoBackAsync();
+            var str = obj as string;
+            switch (str) {
+                case "Username": Username.IsValid = true; break;
+                case "Password": Password.IsValid = true; break;
+                case "ConfirmPassword": ConfirmPassword.IsValid = true; break;
+                case "Email": Email.IsValid = true; break;
+            }
         }
         private bool RequiredValidate()
         {
@@ -126,11 +100,15 @@ namespace ChatApp_Augusto2.ViewModels
         {
             if (!RequiredValidate())
             {
-                // missing fields
                 await _pageDialogService.DisplayAlertAsync("Error", "Missing field/s.", "Okay");
             }
             else
             {
+                if (!Password.Value.Equals(ConfirmPassword.Value))
+                {
+                    await _pageDialogService.DisplayAlertAsync("Error", "Passwords dont match.", "Okay");
+                    return;
+                }
                 IsBusy = true;
                 FirebaseAuthResponseModel res = new FirebaseAuthResponseModel() { };
                 res = await Xamarin.Forms.DependencyService.Get<IFirebaseAuth>().SignUpWithEmailPassword(Username.Value, Email.Value, Password.Value);
@@ -147,6 +125,7 @@ namespace ChatApp_Augusto2.ViewModels
                              .GetCollection("users")
                              .GetDocument(dataClass.loggedInUser.uid)
                              .SetDataAsync(dataClass.loggedInUser);
+                        await _pageDialogService.DisplayAlertAsync("Success", "Sign up successful. Verification email sent.", "Okay");
                         await _navigationService.GoBackAsync();
                     }
                     catch(Exception ex)

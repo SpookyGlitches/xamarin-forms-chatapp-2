@@ -20,9 +20,7 @@ namespace ChatApp_Augusto2.ViewModels
         DataClass dataClass = DataClass.GetInstance;
         public MessagesPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            PopModalCommand = new Command(PopModalAsync);
             _navigationService = navigationService;
-            SendCommand = new Command(Send);
             ConversationsList = new ObservableCollection<ConversationModel>();
         }
 
@@ -32,7 +30,6 @@ namespace ChatApp_Augusto2.ViewModels
             get { return conversationsList; }
             set { SetProperty(ref conversationsList, value); }
         }
-        public ICommand SendCommand { get; set; }
         private ContactModel conversationPartner;
         public ContactModel ConversationPartner
         {
@@ -43,58 +40,18 @@ namespace ChatApp_Augusto2.ViewModels
         public string Message
         {
             get { return message; }
-            set {
-                SetProperty(ref message, value);
-            }
+            set { SetProperty(ref message, value); }
         }
-        private void GetConversations()
+        private bool messagesIsEmpty;
+        public bool MessagesIsEmpty
         {
-            //CrossCloudFirestore.Current
-            //    .Instance.GetCollection("contacts")
-            //    .GetDocument(ConversationPartner.id)
-            //    .GetCollection("conversations")
-            //    .OrderBy("created_at", false)
-            //    .AddSnapshotListener((snapshot, error) =>
-            //    {
-            //        if (snapshot != null)
-            //        {
-            //            foreach (var documentChange in snapshot.DocumentChanges)
-            //            {   
-            //                var json = JsonConvert.SerializeObject(documentChange.Document.Data);
-            //                var obj = JsonConvert.DeserializeObject<ConversationModel>(json);
-            //                switch (documentChange.Type)
-            //                {
-            //                    case DocumentChangeType.Added:
-            //                        ConversationsList.Add(obj);
-            //                        break;
-            //                    case DocumentChangeType.Modified:
-            //                        if (ConversationsList.Where(c => c.id == obj.id).Any())
-            //                        {
-            //                            var item = ConversationsList.Where(c => c.id == obj.id).FirstOrDefault();
-            //                        }
-            //                        break;
-            //                    case DocumentChangeType.Removed:
-            //                        if (ConversationsList.Where(c => c.id == obj.id).Any())
-            //                        {
-            //                            var item = ConversationsList.Where(c => c.id == obj.id).FirstOrDefault();
-            //                            ConversationsList.Remove(item);
-            //                        }
-            //                        break;
-            //                }
-            //                //missing
-            //            }
-            //        }
-            //    });
+            get { return messagesIsEmpty; }
+            set { SetProperty(ref messagesIsEmpty, value); }
         }
+        public ICommand PopModalCommand => new Command(async () => await _navigationService.GoBackAsync(useModalNavigation: true));
+        public ICommand SendCommand => new Command(Send);
+        public INavigationService _navigationService { get; private set; }
 
-        private async void PopModalAsync()
-        {
-            await _navigationService.GoBackAsync();
-        }
-        //public override void Initialize(INavigationParameters param)
-        //{
-        //    ConversationPartner = param.GetValue<ContactModel>("obj");
-        //}
         public override void OnNavigatedTo(INavigationParameters param)
         {
             ConversationPartner = param.GetValue<ContactModel>("obj");
@@ -130,20 +87,19 @@ namespace ChatApp_Augusto2.ViewModels
                                     }
                                     break;
                             }
-                            //missing
-
                         }
-                        //my implementation
-                        if(ConversationsList.Count !=0)
+                        if (ConversationsList.Count != 0)
                         {
                             MessagingCenter.Send<object, object>(this, "LastMessage", ConversationsList.Last());
+                            MessagesIsEmpty = false;
+                        }
+                        else
+                        {
+                            MessagesIsEmpty = true;
                         }
                     }
                 });
         }
-        public ICommand PopModalCommand { get; set; }
-
-        public INavigationService _navigationService { get; private set; }
         private async void  Send()
         {
             Guid guid = Guid.NewGuid();
@@ -153,8 +109,9 @@ namespace ChatApp_Augusto2.ViewModels
                 id = ID,
                 converseeID = dataClass.loggedInUser.uid,
                 message = Message,
-                created_at = DateTimeOffset.Now.ToUnixTimeMilliseconds()
+                created_at = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
             };
+            Message = string.Empty;
             await CrossCloudFirestore.Current
                     .Instance
                     .GetCollection("contacts")
@@ -162,8 +119,6 @@ namespace ChatApp_Augusto2.ViewModels
                     .GetCollection("conversations")
                     .GetDocument(ID)
                     .SetDataAsync(conversationObject);
-            Message = string.Empty;
-            MessagingCenter.Send<object,object>(this, "LastMessage",conversationObject);
         }
     }
 }

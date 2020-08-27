@@ -7,8 +7,11 @@ using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace ChatApp_Augusto2.ViewModels
 {
@@ -17,92 +20,57 @@ namespace ChatApp_Augusto2.ViewModels
         public SignInPageViewModel(INavigationService navigationService,IPageDialogService pageDialogService)
             : base(navigationService)
         {
-
-            Email = new ValidatableString();
-            Password = new ValidatableString();
-
-            Email.IsValid = Password.IsValid = true;
-
-            IsNotVisible = true;
-
-            TogglePasswordCommand = new DelegateCommand(ToggleIsVisible);
-            SignInCommand = new DelegateCommand(SignIn);
-            SignUpCommand = new DelegateCommand(SignUp);
-            ForgotPasswordCommand = new DelegateCommand(ForgotPassword);
-
             _navigationService = navigationService;
             _pageDialogService = pageDialogService;
-
+            Email = new ValidatableString();
+            Password = new ValidatableString();
+            Email.IsValid = Password.IsValid = true;
+            IsNotVisible = true;
         }
-
-        private async void ForgotPassword()
-        {
-            await _navigationService.NavigateAsync("ForgotPasswordPage");
-        }
-
-        private INavigationService _navigationService { get; set; }
-        public IPageDialogService _pageDialogService { get; private set; }
-
         private ValidatableString email;
         private ValidatableString password;
         private bool isNotVisible;
-
-
+        public INavigationService _navigationService { get; private set; }
+        public IPageDialogService _pageDialogService { get; private set; }
         public ValidatableString Email
         {
             get { return email; }
-            set
-            {
-                SetProperty(ref email, value);
-                RaisePropertyChanged();
-            }
+            set { SetProperty(ref email, value); }
         }
         public ValidatableString Password
         {
             get { return password; }
-            set
-            {
-                SetProperty(ref password, value);
-                RaisePropertyChanged();
-            }
+            set { SetProperty(ref password, value); }
         }
         public bool IsNotVisible
         {
             get { return isNotVisible; }
-            set
-            {
-                SetProperty(ref isNotVisible, value);
-                RaisePropertyChanged();
-            }
+            set { SetProperty(ref isNotVisible, value); }
         }
         private bool isBusy;
         public bool IsBusy
         {
             get { return isBusy; }
-            set 
-            { 
-                SetProperty(ref isBusy, value);
-                RaisePropertyChanged();
+            set { SetProperty(ref isBusy, value); }
+        }
+        public ICommand SignInCommand => new Command(SignIn);
+        public ICommand TogglePasswordCommand => new Command(() => IsNotVisible = !IsNotVisible);
+        public ICommand FocusedCommand => new Command(Focused);
+
+        private void Focused(object obj)
+        {
+            var str = obj as string;
+            switch(str)
+            {
+                case "Email": Email.IsValid = true;break;
+                case "Password": Password.IsValid = true;break;
             }
         }
-        public DelegateCommand SignInCommand { get; private set; }
-        public DelegateCommand TogglePasswordCommand { get; private set; }
-        public DelegateCommand SignUpCommand { get; private set; }
-        public DelegateCommand ForgotPasswordCommand { get; private set; }
-
-        private bool RequiredValidate()
+        async private void SignIn()
         {
             Email.Validate();
             Password.Validate();
-            return Email.IsValid && Password.IsValid;
-        }
-        void ToggleIsVisible()
-        {
-            IsNotVisible = !IsNotVisible;
-        }
-        async public void SignIn()
-        {
-            if (!RequiredValidate()) //if not all fields are filled
+            if (!(Email.IsValid && Password.IsValid))
             {
                 await _pageDialogService.DisplayAlertAsync("Error", "Missing field/s.","Okay");
             }
@@ -115,13 +83,11 @@ namespace ChatApp_Augusto2.ViewModels
                 IsBusy = false;
                 if (res.Status == true)
                 {
-                    await _pageDialogService.DisplayAlertAsync("Success", "You can fucking login bitch", "Fuck you too");
-                    await _navigationService.NavigateAsync("TabbedPageMenu");
+                    await _navigationService.NavigateAsync("/TabbedPageMenu");
                 }
                 else
                 {
-                    await _pageDialogService.DisplayAlertAsync("Error", "Nice try bitch","Okay bitch.");
-                    //await Application.Current.MainPage.DisplayAlert("Error", res.Response, "Okay");
+                    await _pageDialogService.DisplayAlertAsync("Error", res.Response,"Okay.");
                 }
             }
         }
@@ -131,13 +97,6 @@ namespace ChatApp_Augusto2.ViewModels
             Password.Value = string.Empty;
             Email.IsValid = true;
             Password.IsValid = true;
-        }
-        private async void SignUp()
-        {
-            
-            //await _navigationService.NavigateAsync("SignUpPage");
-            await NavigationService.NavigateAsync("SignUpPage");
-            ResetFields();
         }
     }
 }

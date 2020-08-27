@@ -3,96 +3,106 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:ChatApp_Augusto2.CustomRenderers"
-             NavigationPage.HasNavigationBar="False"
+             xmlns:renderers="clr-namespace:ChatApp_Augusto2.CustomRenderers"
+             xmlns:prism="http://prismlibrary.com"
              mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
              x:Class="ChatApp_Augusto2.Views.SignInPage">
     <ContentPage.Content>
         <Grid>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="4*"/>
-                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-
-                <StackLayout BackgroundColor="#1976D2" Grid.Row="0" ></StackLayout>
-                <StackLayout Grid.Row="1" VerticalOptions="Center" Padding="15,0">
+                <Frame Grid.Row="0" Margin="0" Padding="0" BackgroundColor="#1976D2">
+                    <Image Source="CloudIcon.png" HorizontalOptions="Center" VerticalOptions="Center"
+                           HeightRequest="{Binding Converter={StaticResource scale}, ConverterParameter='height=100'}"
+                           WidthRequest="{Binding Converter={StaticResource scale}, ConverterParameter='height=100'}" />
+                </Frame>
+                <StackLayout Grid.Row="1" VerticalOptions="Center" Padding="{Binding Converter={StaticResource scale}, ConverterParameter='thickness=10,10,10,10'}">
+                    <Label Text="{Binding Email.Value}" />
+                    <Label Text="{Binding Password.Value}"/>
+                    <Frame Style="{StaticResource EntryFrame}">
+                        <Frame.Triggers>
+                            <DataTrigger TargetType="Frame" Binding="{Binding Email.IsValid}"  Value="False">
+                                <Setter Property="BorderColor" Value="Red"/>
+                            </DataTrigger>
+                        </Frame.Triggers>
+                        <renderers:NoUEntry Text="{Binding Email.Value}" Placeholder="Email" Keyboard="Email">
+                            <renderers:NoUEntry.Behaviors>
+                                <prism:EventToCommandBehavior 
+                                    EventName="Focused" 
+                                    Command="{Binding FocusedCommand}"
+                                    CommandParameter="Email"/>
+                            </renderers:NoUEntry.Behaviors>
+                        </renderers:NoUEntry>
+                    </Frame>
 
                     <Frame Style="{StaticResource EntryFrame}">
                         <Frame.Triggers>
-                            <DataTrigger TargetType="Frame" 
-                                     Binding="{Binding Email.IsValid}"
-                                     Value="False">
+                            <DataTrigger TargetType="Frame" Binding="{Binding Password.IsValid}"  Value="False">
                                 <Setter Property="BorderColor" Value="Red"/>
                             </DataTrigger>
                         </Frame.Triggers>
-                        <local:NoUEntry Text="{Binding Email.Value}" Placeholder="Email" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="8*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <renderers:NoUEntry Text="{Binding Password.Value}" Grid.Column="0" IsPassword="{Binding IsNotVisible}"
+                                            HorizontalOptions="FillAndExpand"
+                                            Placeholder="Password" ReturnType="Done">
+                                <renderers:NoUEntry.Behaviors>
+                                    <prism:EventToCommandBehavior 
+                                    EventName="Focused" 
+                                    Command="{Binding FocusedCommand}"
+                                    CommandParameter="Password"/>
+                                </renderers:NoUEntry.Behaviors>
+                            </renderers:NoUEntry>
+                            <Frame Grid.Column="1" Padding="0" BackgroundColor="LightGray" Margin="0,4" CornerRadius="10">
+                                <Label Text="Show" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="Small">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsNotVisible}" Value="False">
+                                            <Setter Property="Text" Value="Hide"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TogglePasswordCommand}"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </Grid>
                     </Frame>
-
-                    <Frame Style="{StaticResource EntryFrame}" Padding="10,0">
-                        <Frame.Triggers>
-                            <DataTrigger TargetType="Frame" 
-                                     Binding="{Binding Password.IsValid}"
-                                     Value="False">
-                                <Setter Property="BorderColor" Value="Red"/>
-                            </DataTrigger>
-                        </Frame.Triggers>
-
-                        <StackLayout Orientation="Horizontal" Padding="0" Margin="0">
-                            <local:NoUEntry Text="{Binding Password.Value}" IsPassword="{Binding IsNotVisible}"  Placeholder="Password" ReturnType="Done" />
-                            <Button Style="{StaticResource ShowBtn}" Command="{Binding TogglePasswordCommand}" Margin="0,4">
-                                <Button.Triggers>
-                                    <DataTrigger TargetType="Button" Binding="{Binding IsNotVisible}" Value="False">
-                                        <Setter Property="Text" Value="Hide"/>
-                                    </DataTrigger>
-                                </Button.Triggers>
-                            </Button>
-                        </StackLayout>
-                    </Frame>
-
-                    <Frame Margin="0" HorizontalOptions="End" BackgroundColor="Transparent" Padding="0,5,0,10">
+                    <Frame Margin="0" HorizontalOptions="End" BackgroundColor="Transparent" Padding="0">
                         <Label Text="Forgot password" TextColor="Gray">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
+                                <TapGestureRecognizer Command="{prism:NavigateTo 'ForgotPasswordPage'}"/>
                             </Label.GestureRecognizers>
                         </Label>
                     </Frame>
-
-                    <Button Text="Sign in" Margin="0,10,0,0" BackgroundColor="LightGreen"  Command="{Binding SignInCommand}" />
-                    <Button Text="Create an account" BackgroundColor="LightGray" Command="{Binding SignUpCommand}" />
-
-                    <Grid ColumnSpacing="10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                    <Button Text="Sign in" Margin="0,5,0,0" BackgroundColor="LightGreen"  Command="{Binding SignInCommand}" />
+                    <Button Text="Create an account" BackgroundColor="LightGray" Command="{prism:NavigateTo 'SignUpPage'}" />
+                    <Grid Margin="0" Padding="0"
+                          HeightRequest="{Binding Converter={StaticResource scale}, ConverterParameter='height=35'}">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5*"/>
-                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-
-                        <ImageButton CornerRadius="10" Source="GoogleSignIn.png"
-                                 Aspect="AspectFit" Grid.Row="0" Grid.Column="0"
-                                 BackgroundColor="Transparent"
-                                 />
-                        <ImageButton CornerRadius="10" Source="FacebookSignIn.png"
-                                 Aspect="AspectFit" Grid.Row="0" Grid.Column="1"
-                                 BackgroundColor="Transparent"
-                                 />
-
+                        <Frame Padding="0" Grid.Column="0" CornerRadius="10" HasShadow="True">
+                            <Image Source="GoogleSignIn" HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFit" />
+                        </Frame>
+                        <Frame Grid.Column="1" Padding="0"  BackgroundColor="#3b5998" CornerRadius="10">
+                            <Image Source="FacebookSignIn" HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFit"/>
+                        </Frame>
                     </Grid>
                 </StackLayout>
             </Grid>
-            <StackLayout IsVisible="{Binding IsBusy}"
-                         BackgroundColor="Transparent" HorizontalOptions="FillAndExpand"
-                         VerticalOptions="FillAndExpand">
-                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <BoxView BackgroundColor="Black" Opacity="0.5"></BoxView>
-                    <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="Center"
-                                   />
-                </Grid>
-            </StackLayout>
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}">
+                <BoxView BackgroundColor="Black" Opacity="0.5"/>
+                <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"
+                                   VerticalOptions="Center" HorizontalOptions="Center"/>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

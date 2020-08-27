@@ -1,9 +1,10 @@
 FirebaseFirestore.Binding
 FormsViewGroup
+ImageCircle.Forms.Plugin
 Plugin.CloudFirestore
 Prism.Forms
 Prism.Plugin.Popups
-Rg.Plugins.Popup
+Rg.Plugins.Popup.Droid
 Square.OkHttp
 Square.OkIO
 Xamarin.Android.Arch.Core.Common

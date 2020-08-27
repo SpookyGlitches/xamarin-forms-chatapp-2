@@ -3,24 +3,49 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              mc:Ignorable="d"
              Title="Profile"
              x:Class="ChatApp_Augusto2.Views.ProfilePage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Frame">
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="Padding" Value="{Binding Converter={StaticResource scale}, ConverterParameter='width=5'}"/>
+
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HeightRequest">
+                    <Setter.Value>
+                        <OnIdiom Phone="{Binding Converter={StaticResource scale}, ConverterParameter='width=140'}"
+                                 Tablet="{Binding Converter={StaticResource scale}, ConverterParameter='width=80'}"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="WidthRequest">
+                    <Setter.Value>
+                        <OnIdiom Phone="{Binding Converter={StaticResource scale}, ConverterParameter='width=140'}"
+                                 Tablet="{Binding Converter={StaticResource scale}, ConverterParameter='width=80'}">
+                        </OnIdiom>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="CornerRadius" Value="1000"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Padding="10,100">
-            <Frame CornerRadius="100" Padding="7" Margin="0,0,0,20" HorizontalOptions="CenterAndExpand"  HasShadow="False"  HeightRequest="180" WidthRequest="180" BackgroundColor="#1C86EE">
-                <Frame CornerRadius="90" Padding="7" HorizontalOptions="CenterAndExpand"  HasShadow="False"  HeightRequest="180" WidthRequest="180" BackgroundColor="#60AFFE">
-                    <Frame CornerRadius="90" HorizontalOptions="CenterAndExpand"  HasShadow="False"  HeightRequest="180" WidthRequest="180" BackgroundColor="LightGray">
-                        <Image Source="PersonIcon.png"/>
-                    </Frame>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <Frame BackgroundColor="#1C86EE">
+                <Frame BackgroundColor="#60AFFE">
+                    <controls:CircleImage 
+                            Source="https://www.logolynx.com/images/logolynx/04/0415b3e37792cee809ed2b2aec10c1f1.jpeg"
+                            Aspect="AspectFit"/>
                 </Frame>
             </Frame>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Image Source="EditIcon.png" />
-                <Label Text="{Binding Username}"  FontSize="Title" FontAttributes="Bold"/>
-            </StackLayout>
-            <Label Text="{Binding Email}" Margin="0,0,0,10" FontSize="Title" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
-            <Button Text="Log out" Command="{Binding LogOutCommand}" />
+            <Label Text="{Binding Username}" HorizontalOptions="CenterAndExpand"  FontSize="Title" FontAttributes="Bold" 
+                   Margin="0,15,0,0" />
+            <Label Text="{Binding Email}" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+            <Button Text="Log out" Command="{Binding LogOutCommand}"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

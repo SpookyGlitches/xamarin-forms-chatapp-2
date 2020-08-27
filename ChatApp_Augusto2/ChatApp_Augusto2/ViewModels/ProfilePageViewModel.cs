@@ -15,17 +15,12 @@ namespace ChatApp_Augusto2.ViewModels
         DataClass dataClass = DataClass.GetInstance;
         public ProfilePageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            Username = dataClass.loggedInUser.name;
-            Email = dataClass.loggedInUser.email;
-            LogOutCommand = new Command(LogOut);
             _navigationService = navigationService;
         }
-        public ICommand LogOutCommand { get; set; }
-
+        public ICommand LogOutCommand => new Command(LogOut);
         private INavigationService _navigationService;
-
-        public string Username { get; set; }
-        public string Email { get; set; }
+        public string Username => dataClass.loggedInUser.name;
+        public string Email => dataClass.loggedInUser.email;
         async public void LogOut()
         {
             FirebaseAuthResponseModel res = new FirebaseAuthResponseModel() { };

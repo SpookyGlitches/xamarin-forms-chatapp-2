@@ -71,7 +71,7 @@ mono_aot_mode_name:
 	.section	.rodata.env.str.8,"aMS",@progbits,1
 	.type	.L.env.str.8, @object
 .L.env.str.8:
-	.asciz	"40247abd-bfa4-4614-80df-fbb17f2fb236"
+	.asciz	"c63e281c-dc44-47d0-a522-d2bd3eff704b"
 	.size	.L.env.str.8, 37
 	.section	.rodata.env.str.9,"aMS",@progbits,1
 	.type	.L.env.str.9, @object
@@ -81,8 +81,8 @@ mono_aot_mode_name:
 	.section	.rodata.env.str.10,"aMS",@progbits,1
 	.type	.L.env.str.10, @object
 .L.env.str.10:
-	.asciz	"System.Net.Http.HttpClientHandler, System.Net.Http"
-	.size	.L.env.str.10, 51
+	.asciz	"System.Net.Http.HttpClientHandler"
+	.size	.L.env.str.10, 34
 	.section	.rodata.env.str.11,"aMS",@progbits,1
 	.type	.L.env.str.11, @object
 .L.env.str.11:

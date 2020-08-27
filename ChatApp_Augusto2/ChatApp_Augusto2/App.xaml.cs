@@ -18,6 +18,9 @@ namespace ChatApp_Augusto2
          * This imposes a limitation in which the App class must have a default constructor. 
          * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
          */
+        public static float screenWidth { get; set; }
+        public static float screenHeight { get; set; }
+        public static float appScale { get; set; }
         public App() : this(null) { }
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
@@ -28,12 +31,12 @@ namespace ChatApp_Augusto2
             DataClass dataClass = DataClass.GetInstance;
             if (dataClass.isSignedIn)
             {
-                await NavigationService.NavigateAsync("NavigationPage/TabbedPageMenu");
+                await NavigationService.NavigateAsync("/TabbedPageMenu");
             }
             else
             {
                 await NavigationService.NavigateAsync("NavigationPage/SignInPage");
-            }
+            }   
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -41,14 +44,12 @@ namespace ChatApp_Augusto2
 
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<SignInPage, SignInPageViewModel>();
-            containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
+            containerRegistry.RegisterForNavigation<SignInPage>();
+            containerRegistry.RegisterForNavigation<SignUpPage>();
             containerRegistry.RegisterForNavigation<TabbedPageMenu>();
-            containerRegistry.RegisterForNavigation<SearchPage,SearchPageViewModel>();
-            containerRegistry.RegisterForNavigation<ForgotPasswordPage,ForgotPasswordPageViewModel>();
+            containerRegistry.RegisterForNavigation<SearchPage>();
+            containerRegistry.RegisterForNavigation<ForgotPasswordPage>();
             containerRegistry.RegisterForNavigation<MessagesPage>();
-
-
         }
     }
 }

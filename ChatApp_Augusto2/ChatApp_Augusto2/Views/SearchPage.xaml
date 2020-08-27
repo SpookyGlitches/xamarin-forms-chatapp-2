@@ -8,8 +8,13 @@
     <ContentPage.Content>
         <Grid>
             <StackLayout Padding="15,30">
-                <Label Text="{Binding SelectedItem.name}"/>
-                <ListView SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding Users}" HasUnevenRows="true">
+                <Label Text="Back" TextColor="Blue" FontSize="Medium" Margin="0,0,0,10">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <ListView SelectedItem="{Binding SelectedItem,Mode=TwoWay}" ItemsSource="{Binding Users}" HasUnevenRows="true">
                     <ListView.ItemTemplate>
                         <DataTemplate >
                             <ViewCell>
@@ -28,13 +33,6 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
-            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy}">
-                <BoxView BackgroundColor="Black" Opacity="0.5"></BoxView>
-                <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="Center"
-                                   />
-            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

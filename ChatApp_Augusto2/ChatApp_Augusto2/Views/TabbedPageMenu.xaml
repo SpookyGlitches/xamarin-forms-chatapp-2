@@ -4,8 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:ChatApp_Augusto2.Views"
-            mc:Ignorable="d"
-            NavigationPage.HasNavigationBar="false"
+             mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="false"
              x:Class="ChatApp_Augusto2.Views.TabbedPageMenu">
     <local:ChatPage IconImageSource="ChatIcon.png"/>
     <local:ProfilePage IconImageSource="PersonIcon.png"/>

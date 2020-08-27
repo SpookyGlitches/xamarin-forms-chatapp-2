@@ -25,17 +25,18 @@ namespace ChatApp_Augusto2.ViewModels
         DataClass dataClass = DataClass.GetInstance;
         public ChatPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService)
         {
-            ContactList = new ObservableCollection<ContactModel>();
             _pageDialogService = pageDialogService;
-            SearchCommand = new Command(Search);
             _navigationService = navigationService;
+            ContactList = new ObservableCollection<ContactModel>();
+        }
+        public override void Initialize(INavigationParameters parameters)
+        {
             CrossCloudFirestore.Current
                 .Instance
                 .GetCollection("contacts")
                 .WhereArrayContains("contactID", dataClass.loggedInUser.uid)
                 .AddSnapshotListener((snapshot, error) =>
                 {
-                    IsBusy = true;
                     if (snapshot != null)
                     {
                         foreach (var documentChange in snapshot.DocumentChanges)
@@ -58,41 +59,29 @@ namespace ChatApp_Augusto2.ViewModels
                                     if (ContactList.Where(c => c.id == obj.id).Any())
                                     {
                                         var item = ContactList.Where(c => c.id == obj.id).FirstOrDefault();
+                                        string idOfRemoved = item.contactID[0] == dataClass.loggedInUser.uid ? item.contactID[1] : item.contactID[0];
+                                        bool test = dataClass.loggedInUser.contacts.Remove(idOfRemoved);
                                         ContactList.Remove(item);
                                     }
                                     break;
 
                             }
                         }
+                        ContactListIsEmpty = ContactList.Count == 0;
                     }
-                    IsBusy = false;
                 });
         }
-        private bool isBusy;
-        public bool IsBusy
+        private bool contactListIsEmpty;
+        public bool ContactListIsEmpty
         {
-            get { return isBusy; }
-            set { SetProperty(ref isBusy, value); }
+            get { return contactListIsEmpty; }
+            set { SetProperty(ref contactListIsEmpty, value); }
         }
-        private async void Search()
-        {
-            var param = new Prism.Navigation.NavigationParameters();
-            param.Add("search", Text);
-            await _navigationService.NavigateAsync("SearchPage",param,true,true) ;
-        }
-
-        public ICommand SearchCommand { get; set; }
-        public INavigationService _navigationService { get; private set; }
-
         private string text;
         public string Text
         {
             get { return text; }
-            set
-            {
-                text = value;
-                RaisePropertyChanged();
-            }
+            set { SetProperty(ref text, value); }
         }
         private ContactModel selectedItem;
         public ContactModel SelectedItem
@@ -101,7 +90,7 @@ namespace ChatApp_Augusto2.ViewModels
             set
             {
                 selectedItem = value;
-                if(value != null)
+                if (value != null)
                 {
                     NavigateToMessages();
                 }
@@ -112,63 +101,24 @@ namespace ChatApp_Augusto2.ViewModels
         public ObservableCollection<ContactModel> ContactList
         {
             get { return contactList; }
-            set
-            {
-                contactList = value;
-                RaisePropertyChanged();
-            }
+            set { SetProperty(ref contactList, value); }
         }
+        public ICommand SearchCommand => new Command(Search);
+        public INavigationService _navigationService { get; private set; }
         public IPageDialogService _pageDialogService { get; private set; }
+        private async void Search()
+        {
+            var param = new Prism.Navigation.NavigationParameters();
+            param.Add("search", Text);
+            await _navigationService.NavigateAsync("SearchPage", param, useModalNavigation:true);
+            Text = String.Empty;
+        }
         private async void NavigateToMessages()
         {
-
             var param = new Prism.Navigation.NavigationParameters();
             param.Add("obj", SelectedItem);
-            await _navigationService.NavigateAsync("MessagesPage",param, true, true);
+            await _navigationService.NavigateAsync("MessagesPage",param, useModalNavigation:true);
             SelectedItem = null;
-        }
-        private void GetResults()
-        {
-            //CrossCloudFirestore.Current
-            //    .Instance
-            //    .GetCollection("contacts")
-            //    .WhereArrayContains("contactID", dataClass.loggedInUser.uid)
-            //    .AddSnapshotListener((snapshot, error) =>
-            //    {
-            //        IsBusy = true;
-            //        if(snapshot != null)
-            //        {
-            //            foreach(var documentChange in snapshot.DocumentChanges)
-            //            {
-            //                var json = JsonConvert.SerializeObject(documentChange.Document.Data);
-            //                var obj = JsonConvert.DeserializeObject<ContactModel>(json);
-            //                switch (documentChange.Type) 
-            //                {
-            //                    case DocumentChangeType.Added:
-            //                        ContactList.Add(obj);
-            //                        break;
-            //                    case DocumentChangeType.Modified:
-            //                        if(ContactList.Where(c => c.id == obj.id).Any())
-            //                        {
-            //                            var item = ContactList.Where(c => c.id == obj.id).FirstOrDefault();
-            //                            item = obj;
-            //                        }
-            //                        break;
-            //                    case DocumentChangeType.Removed:
-            //                        if(ContactList.Where(c => c.id == obj.id).Any())
-            //                        {
-            //                            var item = ContactList.Where(c => c.id == obj.id).FirstOrDefault();
-            //                        }
-            //                        break;
-                            
-            //                }
-            //            }
-            //        }
-            //        Count = ContactList.Count;
-            //        IsBusy = false;
-            //    });
-
-
         }
     }
 }

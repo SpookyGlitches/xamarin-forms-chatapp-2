@@ -22,6 +22,7 @@ namespace ChatApp_Augusto2.Droid
                 GradientDrawable gd = new GradientDrawable();
                 Control.SetBackground(gd);
             }
+
         }
     }
 }

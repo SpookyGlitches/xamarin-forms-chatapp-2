@@ -43,8 +43,8 @@ namespace ChatApp_Augusto2.Droid.DependencyServices
                         email = FirebaseAuth.Instance.CurrentUser.Email,
                         name = dataClass.loggedInUser.name,
                         userType = dataClass.loggedInUser.userType,
-                        created_at = dataClass.loggedInUser.created_at,
-                        //contacts = dataClass.loggedInUser.contacts
+                        contacts = dataClass.loggedInUser.contacts,
+                        created_at = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
                     };
                     dataClass.isSignedIn = true;
                 }
@@ -82,6 +82,7 @@ namespace ChatApp_Augusto2.Droid.DependencyServices
                         name = yourModel.name,
                         userType = yourModel.userType,
                         created_at = yourModel.created_at,
+                        contacts = yourModel.contacts
                     };
                     dataClass.isSignedIn = true;
                 }
@@ -155,7 +156,7 @@ namespace ChatApp_Augusto2.Droid.DependencyServices
                     email = email,
                     name = defaultName,
                     userType = 0,
-                    created_at = DateTime.Now.ToString("yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss.fffffffK") //
+                    created_at = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
                 };
                 return response;
             }

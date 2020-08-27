@@ -13,6 +13,9 @@ mono.com.google.firebase.firestore.EventListenerImplementor;mono.com.google.fire
 Com.Google.Firebase.Firestore.Util.IListenerImplementor, FirebaseFirestore.Binding;mono.com.google.firebase.firestore.util.ListenerImplementor
 Com.Google.Firebase.Firestore.Util.IListenerImplementor;mono.com.google.firebase.firestore.util.ListenerImplementor
 mono.com.google.firebase.firestore.util.ListenerImplementor;mono.com.google.firebase.firestore.util.ListenerImplementor
+ImageCircle.Forms.Plugin.Droid.ImageCircleRenderer, ImageCircle.Forms.Plugin;crc6436929b8ad3b40f6f.ImageCircleRenderer
+ImageCircle.Forms.Plugin.Droid.ImageCircleRenderer;crc6436929b8ad3b40f6f.ImageCircleRenderer
+imagecircle.forms.plugin.droid.ImageCircleRenderer;crc6436929b8ad3b40f6f.ImageCircleRenderer
 Plugin.CloudFirestore.EventHandlerListener`1, Plugin.CloudFirestore;crc64b71b9ebf746d349f.EventHandlerListener_1
 Plugin.CloudFirestore.EventHandlerListener`1;crc64b71b9ebf746d349f.EventHandlerListener_1
 plugin.cloudfirestore.EventHandlerListener_1;crc64b71b9ebf746d349f.EventHandlerListener_1
@@ -34,12 +37,12 @@ plugin.cloudfirestore.ObjectHolder_1;crc64b71b9ebf746d349f.ObjectHolder_1
 Plugin.CloudFirestore.OnCompleteHandlerListener, Plugin.CloudFirestore;crc64b71b9ebf746d349f.OnCompleteHandlerListener
 Plugin.CloudFirestore.OnCompleteHandlerListener;crc64b71b9ebf746d349f.OnCompleteHandlerListener
 plugin.cloudfirestore.OnCompleteHandlerListener;crc64b71b9ebf746d349f.OnCompleteHandlerListener
-Rg.Plugins.Popup.Droid.Renderers.PopupPageRenderer, Rg.Plugins.Popup;crc643dd37f507f3d9710.PopupPageRenderer
-Rg.Plugins.Popup.Droid.Renderers.PopupPageRenderer;crc643dd37f507f3d9710.PopupPageRenderer
-rg.plugins.popup.droid.renderers.PopupPageRenderer;crc643dd37f507f3d9710.PopupPageRenderer
-Rg.Plugins.Popup.Droid.Gestures.RgGestureDetectorListener, Rg.Plugins.Popup;crc64fdbeeba101bd56dc.RgGestureDetectorListener
-Rg.Plugins.Popup.Droid.Gestures.RgGestureDetectorListener;crc64fdbeeba101bd56dc.RgGestureDetectorListener
-rg.plugins.popup.droid.gestures.RgGestureDetectorListener;crc64fdbeeba101bd56dc.RgGestureDetectorListener
+Rg.Plugins.Popup.Droid.Renderers.PopupPageRenderer, Rg.Plugins.Popup.Droid;crc6460d2b0234674b457.PopupPageRenderer
+Rg.Plugins.Popup.Droid.Renderers.PopupPageRenderer;crc6460d2b0234674b457.PopupPageRenderer
+rg.plugins.popup.droid.renderers.PopupPageRenderer;crc6460d2b0234674b457.PopupPageRenderer
+Rg.Plugins.Popup.Droid.Gestures.RgGestureDetectorListener, Rg.Plugins.Popup.Droid;crc647a155f775cb6802f.RgGestureDetectorListener
+Rg.Plugins.Popup.Droid.Gestures.RgGestureDetectorListener;crc647a155f775cb6802f.RgGestureDetectorListener
+rg.plugins.popup.droid.gestures.RgGestureDetectorListener;crc647a155f775cb6802f.RgGestureDetectorListener
 Square.OkHttp.Call+ActionCallback, Square.OkHttp;com.squareup.okhttp.Call_ActionCallback
 Square.OkHttp.Call.ActionCallback;com.squareup.okhttp.Call_ActionCallback
 com.squareup.okhttp.Call_ActionCallback;com.squareup.okhttp.Call_ActionCallback

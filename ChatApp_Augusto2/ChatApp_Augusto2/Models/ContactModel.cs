@@ -49,8 +49,8 @@ namespace ChatApp_Augusto2.Models
                 OnPropertyChanged(nameof(contactEmail));
             }
         }
-        string _created_at { get; set; }
-        public string created_at
+        long _created_at { get; set; }
+        public long created_at
         {
             get { return _created_at; }
             set
