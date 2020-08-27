@@ -31,7 +31,9 @@ Unfamiliar of this phase but Diawi was used for this phase.
 * [Prism](https://prismlibrary.com/)
 * [Firebase](https://firebase.google.com/)
 * [Firestore](https://firebase.google.com/docs/firestore)
+
 ## Authors
 
 * Earl Augusto - I've compiled them all!
-* Chris Ray Belarmino - main source of code (from helpers, ui scaling and database stuff) and my professor. 
+* Chris Ray Belarmino - main source of code and guided this very app from UI and scaling, authentication, chat functionality, testing and deployment (our mobile development professor).
+
