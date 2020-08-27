@@ -1,4 +1,4 @@
-👻👻👻👻👻👻👻👻
+<p style="text-align: center;">👻💀👻💀👻💀👻💀👻💀👻💀👻💀👻💀</p>
 
 # Chat App
 
@@ -39,4 +39,4 @@ Unfamiliar of this phase but Diawi was used for this phase.
 * Earl Augusto - I've compiled them all!
 * Chris Ray Belarmino - main source of code and guided this very app from UI and scaling, authentication, chat functionality, testing and deployment (our mobile development professor).
 
-👻👻👻👻👻👻👻👻
+<p style="text-align: center;">👻💀👻💀👻💀👻💀👻💀👻💀👻💀👻💀</p>
