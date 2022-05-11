@@ -40,7 +40,7 @@ In the Android Manifest, the minimum android version is Android 5.0 (Lollipop) a
 
 ## Authors
 
-- SpookyGlitches - I've compiled them all!
+- ![SpookyGlitches](https://github.com/SpookyGlitches) - I've compiled them all!
 - ![Chris  Ray Belarmino](https://github.com/raychrisbelarmino) - main source of code and guided this very app from UI and scaling, authentication, chat functionality, testing and deployment
 
 <p align="center">👻💀👻💀👻💀👻💀👻💀👻💀👻💀👻💀</p>
